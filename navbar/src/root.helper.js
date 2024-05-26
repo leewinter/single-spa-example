@@ -7,4 +7,8 @@ export const links = [
     name: "Planets",
     href: "/planets",
   },
+  {
+    name: "Planets Graph",
+    href: "/planets-graph",
+  },
 ];
