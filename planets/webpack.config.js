@@ -13,7 +13,7 @@ module.exports = (webpackConfigEnv) => {
   );
 
   standalonePlugin.options.importMapUrl = new URL(
-    "https://react.microfrontends.app/importmap.json"
+    "https://raw.githubusercontent.com/react-microfrontends/shared-dependencies/master/importmap.json"
   );
 
   const externals = [/^rxjs\/?.*$/];
