@@ -1,6 +1,8 @@
 import React, { useReducer, useEffect } from "react";
 import { getPlanets } from "../utils/api.js";
-import PlanetChart from "../planet-chart/planet-chart.component.js";
+import PlanetChartPie from "../planet-chart/pie-chart.component";
+import PlanetChartBar from "../planet-chart/bar-chart.component";
+import PlanetChartRadar from "../planet-chart/radar-chart.component";
 
 export default function PlanetsGraphPage(props) {
   const initialState = {
@@ -35,7 +37,7 @@ export default function PlanetsGraphPage(props) {
     if (nextPage && page > 0) {
       const timeout = setTimeout(function () {
         dispatch({ type: "fetchPlanets" });
-      }, 500);
+      }, 100);
 
       return function () {
         clearTimeout(timeout);
@@ -47,7 +49,7 @@ export default function PlanetsGraphPage(props) {
     <div>
       <div className="grid grid-flow-row-dense grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
         <div className="p-3 md:p-5 lg:p-10">
-          <PlanetChart
+          <PlanetChartPie
             graphTitle="Planet Diameter Kilometers"
             dataLabel="Diameter"
             dataKey="diameter"
@@ -56,16 +58,7 @@ export default function PlanetsGraphPage(props) {
           />
         </div>
         <div className="p-3 md:p-5 lg:p-10">
-          <PlanetChart
-            graphTitle="Surface Water"
-            dataLabel="Surface Water"
-            dataKey="surface_water"
-            planets={state.planets}
-            loading={loading || nextPage}
-          />
-        </div>
-        <div className="p-3 md:p-5 lg:p-10">
-          <PlanetChart
+          <PlanetChartRadar
             graphTitle="Gravity"
             dataLabel="Gravity"
             dataKey="gravity"
@@ -74,7 +67,16 @@ export default function PlanetsGraphPage(props) {
           />
         </div>
         <div className="p-3 md:p-5 lg:p-10">
-          <PlanetChart
+          <PlanetChartPie
+            graphTitle="Surface Water"
+            dataLabel="Surface Water"
+            dataKey="surface_water"
+            planets={state.planets}
+            loading={loading || nextPage}
+          />
+        </div>
+        <div className="p-3 md:p-5 lg:p-10">
+          <PlanetChartPie
             graphTitle="Population"
             dataLabel="Population"
             dataKey="population"
@@ -83,10 +85,19 @@ export default function PlanetsGraphPage(props) {
           />
         </div>
         <div className="p-3 md:p-5 lg:p-10">
-          <PlanetChart
+          <PlanetChartBar
             graphTitle="Orbital Period"
             dataLabel="Orbital Period"
             dataKey="orbital_period"
+            planets={state.planets}
+            loading={loading || nextPage}
+          />
+        </div>
+        <div className="p-3 md:p-5 lg:p-10">
+          <PlanetChartBar
+            graphTitle="Rotation Period"
+            dataLabel="Rotation Period"
+            dataKey="rotation_period"
             planets={state.planets}
             loading={loading || nextPage}
           />

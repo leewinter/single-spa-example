@@ -1,18 +1,23 @@
 import React from "react";
-import { withRouter } from "react-router";
 import { Chart, registerables } from "chart.js";
 import { Pie } from "react-chartjs-2";
 import { useWindowResize } from "./use-window-resize";
 import SkeletonGraphLoader from "./skeleten-graph-loader";
+import { normalisePlanet } from "./chart-helpers";
 
-function PlanetChart(props) {
+export default function PlanetChartPie(props) {
   const { planets, graphTitle, dataLabel, dataKey, loading } = props;
 
   const { dimensions } = useWindowResize();
 
-  if (loading) return <SkeletonGraphLoader />;
+  if (loading) return <SkeletonGraphLoader chartType="pie" />;
 
   Chart.register(...registerables);
+
+  const data = planets
+    .map(normalisePlanet)
+    .filter((p) => p[dataKey])
+    .sort((a, b) => a[dataKey] - b[dataKey]);
 
   return (
     <Pie
@@ -35,17 +40,17 @@ function PlanetChart(props) {
             let delay = 0;
             if (type === "data" && mode === "default") {
               // Adapt the data point index animation delay according to the quantity. This will make different size datasets consistent
-              delay = dataIndex * (1300 / planets.length);
+              delay = dataIndex * (1300 / data.length);
             }
             return delay;
           },
         },
-      }} // surface_water
+      }}
       data={{
-        labels: planets.map((planet) => planet.name),
+        labels: data.map((planet) => planet.name),
         datasets: [
           {
-            data: planets.map((planet) => planet[dataKey]),
+            data: data.map((planet) => planet[dataKey]),
             label: dataLabel,
           },
         ],
@@ -53,5 +58,3 @@ function PlanetChart(props) {
     />
   );
 }
-
-export default withRouter(PlanetChart);
