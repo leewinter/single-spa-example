@@ -32,4 +32,4 @@ The new [planets-graph](./planets-graph/package.json) package simply adds a new 
 
 - Similar to the current packages theres little to no unit tests. It would make a lot of sense to implement tests when considering the concept of [single-spa](https://single-spa.js.org/) architecture.
 
-- To improve the development experience in isolation it would make sense to implement Storybook.
+- To improve the development experience in isolation it would make sense to implement [Storybook](https://storybook.js.org/).
