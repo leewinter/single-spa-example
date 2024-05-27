@@ -1,6 +1,6 @@
 {
   "scripts": {
-    "start": "webpack serve",
+    "start": "webpack serve --port 8004 --env isLocal",
     "start:standalone": "webpack serve --env standalone",
     "build": "concurrently npm:build:*",
     "build:webpack": "webpack --mode=production",

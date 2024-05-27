@@ -1,6 +1,6 @@
 {
   "scripts": {
-    "start": "webpack serve",
+    "start": "webpack serve --port 8000 --env isLocal",
     "build": "webpack --mode=production",
     "analyze": "webpack --mode=production --env analyze",
     "lint": "eslint src",
